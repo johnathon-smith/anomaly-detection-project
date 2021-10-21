@@ -67,7 +67,7 @@ def wrangle_logs():
     #Create a column for each piece of the requested path and drop the original path column
     request_path_and_params = logs.path.str.split('/', expand=True)
     request_path_and_params.columns = ['request_section', 'request_subject', 'request_lesson', 'param_4', 'param_5', 'param_6', 'param_7', 'param_8']
-    logs = logs.drop(columns='path').join(request_path_and_params)
+    logs = logs.join(request_path_and_params)
 
     #Now convert 'date' to the index
     logs = logs.set_index('date').sort_index()
